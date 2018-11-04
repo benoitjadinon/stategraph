@@ -22,36 +22,43 @@ class LoginNode {
   static Widget _render(IState state) {
     if (state is LoginErrorState)
       return Container(
-          padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
-          child: Center(
-              child: Column(
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+        color: Colors.white,
+        child: Center(
+          child: Column(
             children: <Widget>[
               Image.network(
                 'https://flutter.io/images/flutter-mark-square-100.png',
               ),
               Text(state.loginErrorMessage,
                   textDirection: TextDirection.ltr,
-                  style: TextStyle(color: Colors.white))
+                  style: TextStyle(color: Colors.red))
             ],
-          )));
+          )
+        )
+      );
     else
       return Container(
-          padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
-          child: Center(
-              child: Column(children: <Widget>[
+        padding: EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 0.0),
+        color: Colors.white,
+        child: Center(
+          child: Column(children: <Widget>[
             Image.network(
               'https://flutter.io/images/flutter-mark-square-100.png',
             ),
-            FlatButton(
-              child: Text(
-                'Login',
-                textDirection: TextDirection.ltr,
-                style: TextStyle(color: Colors.white),
-              ),
-              onPressed: () => StateGraph.apply(login(
-                  Account.login(StateGraph.apiState()),
-                  "username",
-                  "password")),
+            new Directionality(
+              textDirection: TextDirection.ltr,
+              child: FlatButton(
+                child: Text(
+                  'Login',
+                  //textDirection: TextDirection.ltr,
+                  //style: TextStyle(color: Colors.white),
+                ),
+                onPressed: () => StateGraph.apply(login(
+                    Account.login(StateGraph.apiState()),
+                    "username",
+                    "password")),
+              )
             )
           ])));
   }
